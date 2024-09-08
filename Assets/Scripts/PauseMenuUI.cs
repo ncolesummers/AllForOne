@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class Hud : MonoBehaviour
+public class PauseMenuUI : MonoBehaviour
 {
 
 //    public GameObject Hud;
     public bool hudOpen = false;
     public GameObject pauseMenuUI;
-    public GameObject button;
+    //public GameObject button;
     //public TextMeshProUGUI hudText;
     //public GameObject gameManagerObject;
     //public GameManager gameManager;
@@ -41,14 +41,14 @@ public class Hud : MonoBehaviour
         Time.timeScale = 0f;
         hudOpen = true;
     }
-    void PlayGame()
+    public void PlayGame()
     {
-
+        openHud();
     }
 
-    void RestartGame()
+    public void RestartGame()
     {
-        //add code for 
+        //add code for this
     }
     public void QuitGame()
     {

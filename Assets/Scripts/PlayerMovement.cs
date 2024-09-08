@@ -1,38 +1,39 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-
+    public Animator animator;
     public float moveSpeed = 5f;
     public float jumpForce = 5f;
-
-    public Sprite idleSprite;
-    public Sprite runSprite1;
-    public Sprite runSprite2;
-    public Sprite airSprite;
-
+    private bool isRun = false;
+    private bool isJump = false;
+    private bool isIdle = true;
     private Rigidbody2D rb2d;
     private SpriteRenderer spriteRenderer;
 
     private bool isGrounded = true;
-    private float animationTimer = 0f;
+    //private float animationTimer = 0f;
 
-    private float animationInterval = 0.1f;
+    //private float animationInterval = 0.1f;
 
-    private bool isRunningSprite1 = true;
+    //private bool isRunningSprite1 = true;
 
     void Start() {
 
         rb2d = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        spriteRenderer.sprite = idleSprite;
+        //spriteRenderer.sprite = idleSprite;
 
     }
 
     void Update() {
 
+        animator.SetBool("IsRun", isRun);
+        animator.SetBool("IsJump", isJump);
+        animator.SetBool("IsIdle", isIdle);
         Move();
         Jump();
         Animate();
@@ -62,27 +63,37 @@ public class PlayerMovement : MonoBehaviour
     private void Animate() {
         float moveInput = Input.GetAxis("Horizontal");
         if (!isGrounded) {
-            spriteRenderer.sprite = airSprite;
+            //spriteRenderer.sprite = airSprite;
+            isJump = true;
+            isIdle = false;
+            isRun = false;
         }
         else {
             if(Mathf.Approximately(moveInput, 0)) {
-                spriteRenderer.sprite = idleSprite;
+                //spriteRenderer.sprite = idleSprite;
+                isJump = false;
+                isIdle = true;
+                isRun = false;
             }
             else {
-                animationTimer += Time.deltaTime;
-                if (animationTimer >= animationInterval) {
-                    animationTimer = 0f;
-                    if (isRunningSprite1) {
-                        spriteRenderer.sprite = runSprite1;
-                    }
-                    else {
-                        spriteRenderer.sprite = runSprite2;
-                    }
-                    isRunningSprite1 = !isRunningSprite1;
-                }
+                isJump = false;
+                isIdle = false;
+                isRun = true;
+
+                //animationTimer += Time.deltaTime;
+                //if (animationTimer >= animationInterval) {
+                //    animationTimer = 0f;
+                //    if (isRunningSprite1) {
+                //spriteRenderer.sprite = runSprite1;
+
+                //    }
+                //    else {
+                //spriteRenderer.sprite = runSprite2;
+                //    }
+                //    isRunningSprite1 = !isRunningSprite1;
+            }
             }
         }
-    }
 
     private void OnCollisionEnter2D(Collision2D collision) {
         if (collision.gameObject.CompareTag("Ground")) {
