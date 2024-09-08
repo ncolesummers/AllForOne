@@ -1,0 +1,41 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using TMpro;
+
+public class Hud : MonoBehaviour
+{
+
+//    public GameObject Hud;
+    public bool hudOpen;
+
+    public TextMeshProUGUI hudText;
+
+    public GameObject gameManagerObject;
+    public GameManager gameManager;
+
+    void Start() {
+        gameManagerObject = GameObject.FindWithTag("GameController");
+    }
+
+    void Update() {
+        if(Input.GetKeyDown(KeyCode.Tab)) {
+            Debug.Log("Tab Pressed");
+            if (hudOpen) {
+                closeHud();
+            }
+            else {
+                openHud();
+            }
+        }
+    }
+
+    void openHud() {
+
+    }
+
+    void closeHud() {
+
+    }
+
+}
