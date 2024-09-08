@@ -13,7 +13,8 @@ public class PlayerMovement : MonoBehaviour
     private bool isIdle = true;
     private Rigidbody2D rb2d;
     private SpriteRenderer spriteRenderer;
-
+	private AudioSource jumpSound;
+	
     private bool isGrounded = true;
     //private float animationTimer = 0f;
 
@@ -25,6 +26,7 @@ public class PlayerMovement : MonoBehaviour
 
         rb2d = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+		jumpSound = GetComponent<AudioSource>();
         //spriteRenderer.sprite = idleSprite;
 
     }
@@ -55,6 +57,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Jump() {
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded) {
+			jumpSound.Play(0);
             rb2d.velocity = new Vector2(rb2d.velocity.x, jumpForce);
             isGrounded = false;
         }

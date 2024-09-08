@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class CoinScript : MonoBehaviour
 {
-
+	private AudioSource soundEffect;
     public GameObject gameManagerObject;
     public GameManager gameManager;
     private int coinValue = 1;
 
     void Start() {
         gameManagerObject = GameObject.FindWithTag("GameController");
+		soundEffect = GetComponent<AudioSource>();
         if (gameManagerObject != null) {
             gameManager = gameManagerObject.GetComponent<GameManager>();
         }
@@ -22,8 +23,9 @@ public class CoinScript : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other) {
         if (other.CompareTag("Player")) {
             if (gameManager != null) {
+				soundEffect.Play(0);
                 gameManager.AddScore(coinValue);
-                gameObject.SetActive(false);
+                //gameObject.SetActive(false);
             }
         }
     }
