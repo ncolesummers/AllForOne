@@ -25,7 +25,7 @@ public class CoinScript : MonoBehaviour
             if (gameManager != null) {
 				soundEffect.Play(0);
                 gameManager.AddScore(coinValue);
-                //gameObject.SetActive(false);
+                gameObject.SetActive(false);
             }
         }
     }

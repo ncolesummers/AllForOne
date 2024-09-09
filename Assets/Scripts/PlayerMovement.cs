@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+	public AudioClip jump;
+	public AudioClip coin;
+	
     public Animator animator;
     public float moveSpeed = 5f;
     public float jumpForce = 5f;
@@ -13,8 +16,7 @@ public class PlayerMovement : MonoBehaviour
     private bool isIdle = true;
     private Rigidbody2D rb2d;
     private SpriteRenderer spriteRenderer;
-	private AudioSource jumpSound;
-	
+	private AudioSource soundEffect;
     private bool isGrounded = true;
     //private float animationTimer = 0f;
 
@@ -26,9 +28,8 @@ public class PlayerMovement : MonoBehaviour
 
         rb2d = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-		jumpSound = GetComponent<AudioSource>();
+		soundEffect = GetComponent<AudioSource>();
         //spriteRenderer.sprite = idleSprite;
-
     }
 
     void Update() {
@@ -57,7 +58,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void Jump() {
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded) {
-			jumpSound.Play(0);
+			soundEffect.clip = jump;
+			soundEffect.Play(0);
             rb2d.velocity = new Vector2(rb2d.velocity.x, jumpForce);
             isGrounded = false;
         }
@@ -107,6 +109,12 @@ public class PlayerMovement : MonoBehaviour
     private void OnCollisionExit2D(Collision2D collision) {
         if (collision.gameObject.CompareTag("Ground")) {
             isGrounded = false;
+        }
+    }
+    void OnTriggerEnter2D(Collider2D other) {
+        if (other.CompareTag("Coin")) {
+				soundEffect.clip = coin;
+				soundEffect.Play(0);
         }
     }
 
