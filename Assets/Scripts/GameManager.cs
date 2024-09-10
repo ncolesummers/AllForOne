@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class GameManager : MonoBehaviour
     public int numCoinsInLevel = 3;
 
     public Scorebar scorebar;
+    public TextMeshProUGUI winMessage;
+    public GameObject gameOverScreen;
 	
     void Start() {
 		music = GetComponent<AudioSource>();
@@ -22,10 +25,33 @@ public class GameManager : MonoBehaviour
         score += value;
         numCoinsCollected++;
         scorebar.UpdateScorebar(numCoinsCollected);
+        CheckEndGame();
     }
 
     public int GetCoins() {
         return numCoinsCollected;
     }
 
+
+    public void CheckEndGame()
+	{
+        if (numCoinsCollected == numCoinsInLevel)
+		{
+            EndGame();
+		}
+	}
+
+    public void EndGame()
+	{
+        if (numCoinsCollected == numCoinsInLevel)
+        {
+            winMessage.SetText("You Won");
+        }else
+		{
+            winMessage.SetText("You lost");
+		}
+
+        gameOverScreen.SetActive(true);
+        Time.timeScale = 0;
+    }
 }
