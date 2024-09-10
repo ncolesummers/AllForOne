@@ -237,7 +237,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 104564731}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 0fbd57d4f0a4c74a78d35798c669130e, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -761,8 +761,8 @@ MonoBehaviour:
   player: {fileID: 104564734}
   offset: {x: 0, y: 0, z: 0}
   smoothSpeed: 0.125
-  leftBoundary: {x: 2, y: 0}
-  rightBoundary: {x: 15, y: 10}
+  leftBoundary: {x: 1.25, y: 0}
+  rightBoundary: {x: 19.75, y: 10}
 --- !u!1001 &530279054
 PrefabInstance:
   m_ObjectHideFlags: 0
