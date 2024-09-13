@@ -18,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
     private SpriteRenderer spriteRenderer;
 	private AudioSource soundEffect;
     private bool isGrounded = true;
+    public GameManager gameManager;
     //private float animationTimer = 0f;
 
     //private float animationInterval = 0.1f;
@@ -103,6 +104,10 @@ public class PlayerMovement : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision) {
         if (collision.gameObject.CompareTag("Ground")) {
             isGrounded = true;
+        }
+        if ( collision.gameObject.CompareTag("enemy") ){
+            Debug.Log("The enemy hit you!");
+            gameManager.EndGame();
         }
     }
 
