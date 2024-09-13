@@ -10,5 +10,8 @@ public class Scorebar : MonoBehaviour
 		float fillAmount = (float)currentTokens / maxTokens;
 
 		scorebarFill.fillAmount = fillAmount;
+		if ( currentTokens >= maxTokens ){
+			this.gameObject.SetActive(false);
+		}
 	}
 }
